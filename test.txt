@@ -1,0 +1,39 @@
+PLAY
+240 BEGIN
+	RE 1,
+	RED 1,
+	FA 2,
+	RED 2,
+	SOL 2,
+	FA 2,
+	SOL 1,
+	SILENCE 4,
+	RE 1,
+	RED 1,
+	FA 2,
+	RED 2,
+	RE 1,
+	DO 1,
+	SIB 1,
+	DO 1,
+	SIB 4
+END
+240 BEGIN
+	RE 1,
+	RED 1,
+	FA 2,
+	RED 2,
+	SOL 2,
+	FA 2,
+	SOL 1,
+	SILENCE 4,
+	RE 1,
+	RED 1,
+	FA 2,
+	RED 2,
+	RE 1,
+	DO 1,
+	SIB 1,
+	DO 1,
+	SIB 4
+END

@@ -1,0 +1,464 @@
+===== STDERR =====
+
+===== STDOUT =====
+
+===== Terminals =====
+[0]EOF [1]error [2]BEGIN [3]END [4]EOLN 
+[5]COMMA [6]PLAY [7]ID [8]DO [9]DOD 
+[10]REB [11]RE [12]RED [13]MIB [14]MI 
+[15]FA [16]FAD [17]SOLB [18]SOL [19]SOLD 
+[20]LAB [21]LA [22]LAD [23]SIB [24]SI 
+[25]SILENCE [26]INTEGER [27]FLOAT 
+
+===== Non terminals =====
+[0]Play [1]Plays [2]Playable [3]Sequence [4]Notes 
+[5]Note [6]Hight [7]Duration 
+
+===== Productions =====
+[0] Play ::= PLAY Plays 
+[1] $START ::= Play EOF 
+[2] Plays ::= 
+[3] Plays ::= Plays Playable 
+[4] Playable ::= Sequence 
+[5] Sequence ::= INTEGER BEGIN Notes END 
+[6] Notes ::= Note 
+[7] Notes ::= Notes COMMA Note 
+[8] Note ::= Hight Duration 
+[9] Duration ::= FLOAT 
+[10] Duration ::= INTEGER 
+[11] Hight ::= DO 
+[12] Hight ::= DOD 
+[13] Hight ::= REB 
+[14] Hight ::= RE 
+[15] Hight ::= RED 
+[16] Hight ::= MIB 
+[17] Hight ::= MI 
+[18] Hight ::= FA 
+[19] Hight ::= FAD 
+[20] Hight ::= SOLB 
+[21] Hight ::= SOL 
+[22] Hight ::= SOLD 
+[23] Hight ::= LAB 
+[24] Hight ::= LA 
+[25] Hight ::= LAD 
+[26] Hight ::= SIB 
+[27] Hight ::= SI 
+[28] Hight ::= SILENCE 
+===== Viable Prefix Recognizer =====
+START lalr_state [0]: {
+  [$START ::= (*) Play EOF , {EOF }]
+  [Play ::= (*) PLAY Plays , {EOF }]
+}
+transition on Play to state [2]
+transition on PLAY to state [1]
+
+-------------------
+lalr_state [1]: {
+  [Plays ::= (*) , {EOF INTEGER }]
+  [Plays ::= (*) Plays Playable , {EOF INTEGER }]
+  [Play ::= PLAY (*) Plays , {EOF }]
+}
+transition on Plays to state [4]
+
+-------------------
+lalr_state [2]: {
+  [$START ::= Play (*) EOF , {EOF }]
+}
+transition on EOF to state [3]
+
+-------------------
+lalr_state [3]: {
+  [$START ::= Play EOF (*) , {EOF }]
+}
+
+-------------------
+lalr_state [4]: {
+  [Sequence ::= (*) INTEGER BEGIN Notes END , {EOF INTEGER }]
+  [Playable ::= (*) Sequence , {EOF INTEGER }]
+  [Play ::= PLAY Plays (*) , {EOF }]
+  [Plays ::= Plays (*) Playable , {EOF INTEGER }]
+}
+transition on Playable to state [7]
+transition on INTEGER to state [6]
+transition on Sequence to state [5]
+
+-------------------
+lalr_state [5]: {
+  [Playable ::= Sequence (*) , {EOF INTEGER }]
+}
+
+-------------------
+lalr_state [6]: {
+  [Sequence ::= INTEGER (*) BEGIN Notes END , {EOF INTEGER }]
+}
+transition on BEGIN to state [8]
+
+-------------------
+lalr_state [7]: {
+  [Plays ::= Plays Playable (*) , {EOF INTEGER }]
+}
+
+-------------------
+lalr_state [8]: {
+  [Hight ::= (*) RED , {INTEGER FLOAT }]
+  [Hight ::= (*) SOLB , {INTEGER FLOAT }]
+  [Hight ::= (*) LAD , {INTEGER FLOAT }]
+  [Note ::= (*) Hight Duration , {END COMMA }]
+  [Hight ::= (*) REB , {INTEGER FLOAT }]
+  [Hight ::= (*) FA , {INTEGER FLOAT }]
+  [Hight ::= (*) LAB , {INTEGER FLOAT }]
+  [Hight ::= (*) SILENCE , {INTEGER FLOAT }]
+  [Notes ::= (*) Note , {END COMMA }]
+  [Hight ::= (*) DO , {INTEGER FLOAT }]
+  [Hight ::= (*) MIB , {INTEGER FLOAT }]
+  [Hight ::= (*) SOL , {INTEGER FLOAT }]
+  [Hight ::= (*) SIB , {INTEGER FLOAT }]
+  [Hight ::= (*) RE , {INTEGER FLOAT }]
+  [Hight ::= (*) FAD , {INTEGER FLOAT }]
+  [Hight ::= (*) LA , {INTEGER FLOAT }]
+  [Notes ::= (*) Notes COMMA Note , {END COMMA }]
+  [Hight ::= (*) DOD , {INTEGER FLOAT }]
+  [Hight ::= (*) MI , {INTEGER FLOAT }]
+  [Hight ::= (*) SOLD , {INTEGER FLOAT }]
+  [Hight ::= (*) SI , {INTEGER FLOAT }]
+  [Sequence ::= INTEGER BEGIN (*) Notes END , {EOF INTEGER }]
+}
+transition on Hight to state [29]
+transition on LAB to state [28]
+transition on Notes to state [27]
+transition on LAD to state [26]
+transition on SI to state [25]
+transition on MI to state [24]
+transition on SOLB to state [23]
+transition on LA to state [22]
+transition on SOLD to state [21]
+transition on DO to state [20]
+transition on RE to state [19]
+transition on FA to state [18]
+transition on REB to state [17]
+transition on FAD to state [16]
+transition on RED to state [15]
+transition on Note to state [14]
+transition on SIB to state [13]
+transition on SOL to state [12]
+transition on SILENCE to state [11]
+transition on DOD to state [10]
+transition on MIB to state [9]
+
+-------------------
+lalr_state [9]: {
+  [Hight ::= MIB (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [10]: {
+  [Hight ::= DOD (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [11]: {
+  [Hight ::= SILENCE (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [12]: {
+  [Hight ::= SOL (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [13]: {
+  [Hight ::= SIB (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [14]: {
+  [Notes ::= Note (*) , {END COMMA }]
+}
+
+-------------------
+lalr_state [15]: {
+  [Hight ::= RED (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [16]: {
+  [Hight ::= FAD (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [17]: {
+  [Hight ::= REB (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [18]: {
+  [Hight ::= FA (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [19]: {
+  [Hight ::= RE (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [20]: {
+  [Hight ::= DO (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [21]: {
+  [Hight ::= SOLD (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [22]: {
+  [Hight ::= LA (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [23]: {
+  [Hight ::= SOLB (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [24]: {
+  [Hight ::= MI (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [25]: {
+  [Hight ::= SI (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [26]: {
+  [Hight ::= LAD (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [27]: {
+  [Notes ::= Notes (*) COMMA Note , {END COMMA }]
+  [Sequence ::= INTEGER BEGIN Notes (*) END , {EOF INTEGER }]
+}
+transition on END to state [34]
+transition on COMMA to state [33]
+
+-------------------
+lalr_state [28]: {
+  [Hight ::= LAB (*) , {INTEGER FLOAT }]
+}
+
+-------------------
+lalr_state [29]: {
+  [Duration ::= (*) INTEGER , {END COMMA }]
+  [Duration ::= (*) FLOAT , {END COMMA }]
+  [Note ::= Hight (*) Duration , {END COMMA }]
+}
+transition on FLOAT to state [32]
+transition on Duration to state [31]
+transition on INTEGER to state [30]
+
+-------------------
+lalr_state [30]: {
+  [Duration ::= INTEGER (*) , {END COMMA }]
+}
+
+-------------------
+lalr_state [31]: {
+  [Note ::= Hight Duration (*) , {END COMMA }]
+}
+
+-------------------
+lalr_state [32]: {
+  [Duration ::= FLOAT (*) , {END COMMA }]
+}
+
+-------------------
+lalr_state [33]: {
+  [Hight ::= (*) RED , {INTEGER FLOAT }]
+  [Hight ::= (*) SOLB , {INTEGER FLOAT }]
+  [Hight ::= (*) LAD , {INTEGER FLOAT }]
+  [Note ::= (*) Hight Duration , {END COMMA }]
+  [Hight ::= (*) REB , {INTEGER FLOAT }]
+  [Hight ::= (*) FA , {INTEGER FLOAT }]
+  [Hight ::= (*) LAB , {INTEGER FLOAT }]
+  [Hight ::= (*) SILENCE , {INTEGER FLOAT }]
+  [Hight ::= (*) DO , {INTEGER FLOAT }]
+  [Hight ::= (*) MIB , {INTEGER FLOAT }]
+  [Hight ::= (*) SOL , {INTEGER FLOAT }]
+  [Hight ::= (*) SIB , {INTEGER FLOAT }]
+  [Hight ::= (*) RE , {INTEGER FLOAT }]
+  [Hight ::= (*) FAD , {INTEGER FLOAT }]
+  [Hight ::= (*) LA , {INTEGER FLOAT }]
+  [Notes ::= Notes COMMA (*) Note , {END COMMA }]
+  [Hight ::= (*) DOD , {INTEGER FLOAT }]
+  [Hight ::= (*) MI , {INTEGER FLOAT }]
+  [Hight ::= (*) SOLD , {INTEGER FLOAT }]
+  [Hight ::= (*) SI , {INTEGER FLOAT }]
+}
+transition on Hight to state [29]
+transition on LAB to state [28]
+transition on LAD to state [26]
+transition on SI to state [25]
+transition on MI to state [24]
+transition on SOLB to state [23]
+transition on LA to state [22]
+transition on SOLD to state [21]
+transition on DO to state [20]
+transition on RE to state [19]
+transition on FA to state [18]
+transition on REB to state [17]
+transition on FAD to state [16]
+transition on RED to state [15]
+transition on Note to state [35]
+transition on SIB to state [13]
+transition on SOL to state [12]
+transition on SILENCE to state [11]
+transition on DOD to state [10]
+transition on MIB to state [9]
+
+-------------------
+lalr_state [34]: {
+  [Sequence ::= INTEGER BEGIN Notes END (*) , {EOF INTEGER }]
+}
+
+-------------------
+lalr_state [35]: {
+  [Notes ::= Notes COMMA Note (*) , {END COMMA }]
+}
+
+-------------------
+-------- ACTION_TABLE --------
+From state #0
+ [term 6:SHIFT(to state 1)]
+From state #1
+ [term 0:REDUCE(with prod 2)] [term 26:REDUCE(with prod 2)]
+From state #2
+ [term 0:SHIFT(to state 3)]
+From state #3
+ [term 0:REDUCE(with prod 1)]
+From state #4
+ [term 0:REDUCE(with prod 0)] [term 26:SHIFT(to state 6)]
+From state #5
+ [term 0:REDUCE(with prod 4)] [term 26:REDUCE(with prod 4)]
+From state #6
+ [term 2:SHIFT(to state 8)]
+From state #7
+ [term 0:REDUCE(with prod 3)] [term 26:REDUCE(with prod 3)]
+From state #8
+ [term 8:SHIFT(to state 20)] [term 9:SHIFT(to state 10)]
+ [term 10:SHIFT(to state 17)] [term 11:SHIFT(to state 19)]
+ [term 12:SHIFT(to state 15)] [term 13:SHIFT(to state 9)]
+ [term 14:SHIFT(to state 24)] [term 15:SHIFT(to state 18)]
+ [term 16:SHIFT(to state 16)] [term 17:SHIFT(to state 23)]
+ [term 18:SHIFT(to state 12)] [term 19:SHIFT(to state 21)]
+ [term 20:SHIFT(to state 28)] [term 21:SHIFT(to state 22)]
+ [term 22:SHIFT(to state 26)] [term 23:SHIFT(to state 13)]
+ [term 24:SHIFT(to state 25)] [term 25:SHIFT(to state 11)]
+From state #9
+ [term 26:REDUCE(with prod 16)] [term 27:REDUCE(with prod 16)]
+From state #10
+ [term 26:REDUCE(with prod 12)] [term 27:REDUCE(with prod 12)]
+From state #11
+ [term 26:REDUCE(with prod 28)] [term 27:REDUCE(with prod 28)]
+From state #12
+ [term 26:REDUCE(with prod 21)] [term 27:REDUCE(with prod 21)]
+From state #13
+ [term 26:REDUCE(with prod 26)] [term 27:REDUCE(with prod 26)]
+From state #14
+ [term 3:REDUCE(with prod 6)] [term 5:REDUCE(with prod 6)]
+From state #15
+ [term 26:REDUCE(with prod 15)] [term 27:REDUCE(with prod 15)]
+From state #16
+ [term 26:REDUCE(with prod 19)] [term 27:REDUCE(with prod 19)]
+From state #17
+ [term 26:REDUCE(with prod 13)] [term 27:REDUCE(with prod 13)]
+From state #18
+ [term 26:REDUCE(with prod 18)] [term 27:REDUCE(with prod 18)]
+From state #19
+ [term 26:REDUCE(with prod 14)] [term 27:REDUCE(with prod 14)]
+From state #20
+ [term 26:REDUCE(with prod 11)] [term 27:REDUCE(with prod 11)]
+From state #21
+ [term 26:REDUCE(with prod 22)] [term 27:REDUCE(with prod 22)]
+From state #22
+ [term 26:REDUCE(with prod 24)] [term 27:REDUCE(with prod 24)]
+From state #23
+ [term 26:REDUCE(with prod 20)] [term 27:REDUCE(with prod 20)]
+From state #24
+ [term 26:REDUCE(with prod 17)] [term 27:REDUCE(with prod 17)]
+From state #25
+ [term 26:REDUCE(with prod 27)] [term 27:REDUCE(with prod 27)]
+From state #26
+ [term 26:REDUCE(with prod 25)] [term 27:REDUCE(with prod 25)]
+From state #27
+ [term 3:SHIFT(to state 34)] [term 5:SHIFT(to state 33)]
+From state #28
+ [term 26:REDUCE(with prod 23)] [term 27:REDUCE(with prod 23)]
+From state #29
+ [term 26:SHIFT(to state 30)] [term 27:SHIFT(to state 32)]
+From state #30
+ [term 3:REDUCE(with prod 10)] [term 5:REDUCE(with prod 10)]
+From state #31
+ [term 3:REDUCE(with prod 8)] [term 5:REDUCE(with prod 8)]
+From state #32
+ [term 3:REDUCE(with prod 9)] [term 5:REDUCE(with prod 9)]
+From state #33
+ [term 8:SHIFT(to state 20)] [term 9:SHIFT(to state 10)]
+ [term 10:SHIFT(to state 17)] [term 11:SHIFT(to state 19)]
+ [term 12:SHIFT(to state 15)] [term 13:SHIFT(to state 9)]
+ [term 14:SHIFT(to state 24)] [term 15:SHIFT(to state 18)]
+ [term 16:SHIFT(to state 16)] [term 17:SHIFT(to state 23)]
+ [term 18:SHIFT(to state 12)] [term 19:SHIFT(to state 21)]
+ [term 20:SHIFT(to state 28)] [term 21:SHIFT(to state 22)]
+ [term 22:SHIFT(to state 26)] [term 23:SHIFT(to state 13)]
+ [term 24:SHIFT(to state 25)] [term 25:SHIFT(to state 11)]
+From state #34
+ [term 0:REDUCE(with prod 5)] [term 26:REDUCE(with prod 5)]
+From state #35
+ [term 3:REDUCE(with prod 7)] [term 5:REDUCE(with prod 7)]
+------------------------------
+-------- REDUCE_TABLE --------
+From state #0
+ [non term 0->state 2]
+From state #1
+ [non term 1->state 4]
+From state #2
+From state #3
+From state #4
+ [non term 2->state 7] [non term 3->state 5]
+From state #5
+From state #6
+From state #7
+From state #8
+ [non term 4->state 27] [non term 5->state 14] [non term 6->state 29]
+From state #9
+From state #10
+From state #11
+From state #12
+From state #13
+From state #14
+From state #15
+From state #16
+From state #17
+From state #18
+From state #19
+From state #20
+From state #21
+From state #22
+From state #23
+From state #24
+From state #25
+From state #26
+From state #27
+From state #28
+From state #29
+ [non term 7->state 31]
+From state #30
+From state #31
+From state #32
+From state #33
+ [non term 5->state 35] [non term 6->state 29]
+From state #34
+From state #35
+-----------------------------

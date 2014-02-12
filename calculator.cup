@@ -1,0 +1,91 @@
+package calculator;
+
+import java.util.TreeMap;
+import java.util.Map;
+
+parser code {:
+    
+    public void report_error(String message, Object info) {
+        StringBuffer m = new StringBuffer("Error");
+		m.append (info.toString());
+        m.append(" : "+message);
+        System.err.println(m.toString());
+    }
+   
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+
+	private Map<String, Integer> values = new TreeMap<String, Integer> ();
+
+	public void setValue (String name, int value) {
+		values.put(name, new Integer (value));
+	}
+	
+	public int getValue (String name) {
+		int value = 0;
+		if (values.containsKey(name))
+			value = values.get(name).intValue();
+		return value;
+	}
+
+:}
+
+terminal BEGIN, END, EOLN;
+terminal COMMA;
+terminal PLAY, ID;
+terminal DO, DOD, REB, RE, RED, MIB, MI, FA, FAD, SOLB, SOL, SOLD, LAB, LA, LAD, SIB, SI, SILENCE;
+terminal Integer INTEGER;
+terminal Float FLOAT;
+
+nonterminal Play, Plays, Playable, Sequence, Notes, Note, Hight, Duration;
+
+Play		::=	PLAY Plays					{: SoundFactory.getScore().play(); :}
+			;
+
+Plays		::=
+		| 	Plays Playable:p				{: SoundFactory.getScore().add((Sequence) p); :}
+		;
+
+Playable	::=	Sequence:s					{: RESULT = SoundFactory.getSequence(); :}
+			;
+			
+Sequence	::=	INTEGER:bpm BEGIN Notes:n END	{: System.out.println(SoundFactory.getToneList());
+RESULT = SoundFactory.createSequence(bpm, SoundFactory.getToneList()); :}										
+			;
+
+Notes		::=	Note:n						{: SoundFactory.createToneList().add((Tone) n);											   
+											   System.out.println("Note added");
+											:}
+			| 	Notes COMMA Note:n			{: SoundFactory.getToneList().add((Tone) n); 
+											System.out.println("Note added too ");
+											:}
+			;
+		
+Note		::=	Hight:h Duration:d			{: RESULT = SoundFactory.createTone((SoundFactory.Tones) h,(Float) d); :}
+			;
+			
+Duration	::= FLOAT:f						{: RESULT = new Float(f); :}
+			| INTEGER:i						{: RESULT = new Float(i); :}
+			;
+		
+Hight 		::=	DO							{: RESULT = SoundFactory.Tones.DO; :}
+			|	DOD							{: RESULT = SoundFactory.Tones.DOD; :}
+			|	REB							{: RESULT = SoundFactory.Tones.REB; :}
+			|	RE							{: RESULT = SoundFactory.Tones.RE; :}
+			|	RED							{: RESULT = SoundFactory.Tones.RED; :}
+			|	MIB							{: RESULT = SoundFactory.Tones.MIB; :}
+			|	MI							{: RESULT = SoundFactory.Tones.MI; :}
+			|	FA							{: RESULT = SoundFactory.Tones.FA; :}
+			|	FAD							{: RESULT = SoundFactory.Tones.FAD; :}
+			|	SOLB						{: RESULT = SoundFactory.Tones.SOLB; :}
+			|	SOL							{: RESULT = SoundFactory.Tones.SOL; :}
+			|	SOLD						{: RESULT = SoundFactory.Tones.SOLD; :}
+			|	LAB							{: RESULT = SoundFactory.Tones.LAB; :}
+			|	LA							{: RESULT = SoundFactory.Tones.LA; :}
+			|	LAD							{: RESULT = SoundFactory.Tones.LAD; :}
+			|	SIB							{: RESULT = SoundFactory.Tones.SIB; :}
+			|	SI							{: RESULT = SoundFactory.Tones.SI; :}
+			|	SILENCE						{: RESULT = SoundFactory.Tones.SILENCE; :}
+			;
